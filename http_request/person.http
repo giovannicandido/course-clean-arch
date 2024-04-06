@@ -1,0 +1,30 @@
+###
+# @name Create a person in database
+< scripts/random_person.js
+POST http://localhost:8080/api/v0/persons
+Content-Type: application/json
+Accept: application/json
+
+{{personJson}}
+###
+# @name Update a person in database
+< {% request.variables.set("id", "9") %}
+PUT http://localhost:8080/api/v0/persons/{{id}}
+Content-Type: application/json
+Accept: application/json
+
+{{personJson}}
+###
+# @name List all person
+GET http://localhost:8080/api/v0/persons
+Accept: application/json
+###
+# @name Get Person by Id
+< {% request.variables.set("id", "7") %}
+GET http://localhost:8080/api/v0/persons/{{id}}
+Accept: application/json
+###
+# @name Delete Person by Id
+< {% request.variables.set("id", "4") %}
+DELETE http://localhost:8080/api/v0/persons/{{id}}
+Accept: application/json

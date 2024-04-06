@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="0" author="gsilva">
+        <createTable tableName="person">
+            <column name="id" type="bigint">
+            </column>
+            <column name="first_name" type="varchar(50)">
+                <constraints nullable="false"></constraints>
+            </column>
+            <column name="last_name" type="varchar(50)">
+                <constraints nullable="false"></constraints>
+            </column>
+            <column name="birth_day" type="date">
+                <constraints nullable="false"></constraints>
+            </column>
+        </createTable>
+        <addPrimaryKey tableName="person" columnNames="id"></addPrimaryKey>
+    </changeSet>
+
+    <changeSet id="1" author="gsilva">
+        <createTable tableName="address">
+            <column name="id" type="bigint">
+            </column>
+            <column name="country_code" type="varchar(4)">
+                <constraints nullable="false"></constraints>
+            </column>
+            <column name="street" type="varchar(50)">
+                <constraints nullable="false"></constraints>
+            </column>
+            <column name="neighborhood" type="varchar(45)">
+                <constraints nullable="false"></constraints>
+            </column>
+            <column name="city" type="varchar(50)">
+                <constraints nullable="false"></constraints>
+            </column>
+            <column name="state" type="varchar(30)">
+                <constraints nullable="false"></constraints>
+            </column>
+            <column name="zip_code" type="varchar(50)">
+            </column>
+            <column name="number" type="int">
+            </column>
+            <column name="person_id" type="bigint">
+                <constraints nullable="false"></constraints>
+            </column>
+        </createTable>
+        <addPrimaryKey tableName="address" columnNames="id"></addPrimaryKey>
+        <addForeignKeyConstraint baseTableName="address" baseColumnNames="person_id"
+                                 constraintName="fk_address_person"
+                                 referencedTableName="person"
+                                 referencedColumnNames="id" />
+    </changeSet>
+    <changeSet id="2" author="gsilva">
+        <createSequence sequenceName="person_seq" incrementBy="1" startValue="1" />
+        <createSequence sequenceName="address_seq" incrementBy="1" startValue="1" />
+    </changeSet>
+</databaseChangeLog>
